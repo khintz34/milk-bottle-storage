@@ -1,18 +1,25 @@
 "use client";
-import Image from "next/image";
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
-import { format, subDays } from "date-fns";
+import {
+  format,
+  subDays,
+  differenceInDays,
+  differenceInMonths,
+} from "date-fns";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { addDays } from "date-fns/esm";
 
 export default function Home() {
-  const [countOfBricks, setCountOfBricks] = useState(12);
+  const [countOfBricks, setCountOfBricks] = useState(8);
   const [ozPerBrick, setOzPerBrick] = useState(60);
   const [totalOzSaved, setTotalOzSaved] = useState(0);
   const [bottlesPerDay, setBottlesPerDay] = useState(1);
-  const [ozPerBottle, setOzPerBottle] = useState(8);
+  const [ozPerBottle, setOzPerBottle] = useState(6);
   const [daysOfSavedMilk, setDaysOfSavedMilk] = useState(0);
-  const [stopPumpingDate, setStopPumpingDate] = useState();
-  const [ozSavedPerDay, setOzSavedPerDay] = useState(12);
+  const [stopPumpingDate, setStopPumpingDate] = useState(new Date());
+  const [ozSavedPerDay, setOzSavedPerDay] = useState(10);
   const [milkEndDate, setMilkEndDate] = useState(new Date("2/11/24"));
 
   useEffect(() => {
@@ -25,14 +32,47 @@ export default function Home() {
   }, [bottlesPerDay, totalOzSaved, ozPerBottle]);
 
   useEffect(() => {
-    // let newDate = format(new Date(milkEndDate - daysOfSavedMilk), "yyyy-MM-dd");
-    // let newDate = new Date(milkEndDate - daysOfSavedMilk);
-    let newDate = subDays(milkEndDate, daysOfSavedMilk);
-    console.log(newDate);
-    if (newDate !== "Invalid Date") {
-      setStopPumpingDate(newDate);
+    let endDate = milkEndDate;
+    let startDate = addDays(new Date(), daysOfSavedMilk);
+    console.log("startDate: ", startDate);
+    console.log("endDate:", milkEndDate);
+
+    let daysDif = differenceInDays(endDate, startDate);
+
+    let neededOzPerDay = bottlesPerDay * ozPerBottle;
+    let endNumber = daysDif * neededOzPerDay;
+    let startNumber = 0;
+    console.log("daysDif: ", daysDif);
+    console.log("EndNum: ", endNumber);
+    let days = 0;
+
+    for (let i = 0; i < daysDif * neededOzPerDay; i++) {
+      console.log(startNumber, endNumber, days);
+      if (startNumber < endNumber) {
+        days++;
+        endNumber -= neededOzPerDay;
+        startNumber += ozSavedPerDay;
+      } else {
+        break;
+      }
     }
-  }, [daysOfSavedMilk, milkEndDate]);
+
+    console.log((daysDif - days) * neededOzPerDay);
+
+    console.log("DAYS: ", days);
+
+    setStopPumpingDate(addDays(startDate, days));
+    console.log("STOP DATE", addDays(new Date(), days));
+    console.log("------------------------");
+  }, [
+    daysOfSavedMilk,
+    milkEndDate,
+    ozPerBottle,
+    bottlesPerDay,
+    countOfBricks,
+    ozPerBrick,
+    ozSavedPerDay,
+  ]);
 
   return (
     <main className={styles.main}>
@@ -94,13 +134,9 @@ export default function Home() {
           <label htmlFor="milkEndDate">
             When are you wanting your child to have milk until?
           </label>
-          <input
-            id="milkEndDate"
-            type="date"
-            value={milkEndDate}
-            onChange={(e) =>
-              setMilkEndDate(format(new Date(e.target.value), "yyyy-MM-dd"))
-            }
+          <DatePicker
+            selected={milkEndDate}
+            onChange={(date) => setMilkEndDate(date)}
           />
         </div>
         {/* <div>Pump End Date: {stopPumpingDate}</div> */}
@@ -108,3 +144,6 @@ export default function Home() {
     </main>
   );
 }
+
+//! note
+// find date of milk end then add oz per day needed to current date and subtract from end date until they are equal
