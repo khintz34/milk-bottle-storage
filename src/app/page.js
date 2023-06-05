@@ -18,7 +18,7 @@ export default function Home() {
   const [bottlesPerDay, setBottlesPerDay] = useState(1);
   const [ozPerBottle, setOzPerBottle] = useState(6);
   const [daysOfSavedMilk, setDaysOfSavedMilk] = useState(0);
-  const [stopPumpingDate, setStopPumpingDate] = useState(new Date());
+  const [stopPumpingDate, setStopPumpingDate] = useState();
   const [ozSavedPerDay, setOzSavedPerDay] = useState(10);
   const [milkEndDate, setMilkEndDate] = useState(new Date("2/11/24"));
 
@@ -31,7 +31,8 @@ export default function Home() {
     setDaysOfSavedMilk(totalOzSaved / (bottlesPerDay * ozPerBottle));
   }, [bottlesPerDay, totalOzSaved, ozPerBottle]);
 
-  useEffect(() => {
+  function calculateMilkStff() {
+    // e.preventDefault();
     let endDate = milkEndDate;
     let startDate = addDays(new Date(), daysOfSavedMilk);
     console.log("startDate: ", startDate);
@@ -45,34 +46,42 @@ export default function Home() {
     console.log("daysDif: ", daysDif);
     console.log("EndNum: ", endNumber);
     let days = 0;
+    let fraction = ozSavedPerDay / neededOzPerDay;
+    console.log("fraction: ", fraction);
+    let peaked = false;
+    let peakedDays;
 
-    for (let i = 0; i < daysDif * neededOzPerDay; i++) {
-      console.log(startNumber, endNumber, days);
-      if (startNumber < endNumber) {
-        days++;
-        endNumber -= neededOzPerDay;
-        startNumber += ozSavedPerDay;
+    for (let i = 0; i < daysDif; i++) {
+      if (!peaked) {
+        // console.log(startNumber, endNumber, days);
+        if (startNumber < endNumber) {
+          days++;
+          endNumber -= neededOzPerDay;
+          startNumber += ozSavedPerDay;
+        } else {
+          startNumber -= neededOzPerDay;
+          days++;
+          peaked = true;
+          peakedDays = days;
+          // console.log("----peak-----");
+        }
       } else {
-        break;
+        // console.log(startNumber, days);
+        startNumber -= neededOzPerDay;
+        days++;
       }
     }
 
-    console.log((daysDif - days) * neededOzPerDay);
+    // setStopPumpingDate(addDays(new Date(), peakedDays));
+    console.log(typeof addDays(new Date(), peakedDays));
+    let objectDate = format(addDays(new Date(), peakedDays), "MMMM dd, yyyy");
+    console.log(typeof objectDate);
+    setStopPumpingDate(objectDate);
 
-    console.log("DAYS: ", days);
-
-    setStopPumpingDate(addDays(startDate, days));
-    console.log("STOP DATE", addDays(new Date(), days));
+    console.log("DAYS: ", peakedDays);
+    console.log("STOP DATE", addDays(new Date(), peakedDays));
     console.log("------------------------");
-  }, [
-    daysOfSavedMilk,
-    milkEndDate,
-    ozPerBottle,
-    bottlesPerDay,
-    countOfBricks,
-    ozPerBrick,
-    ozSavedPerDay,
-  ]);
+  }
 
   return (
     <main className={styles.main}>
@@ -83,7 +92,7 @@ export default function Home() {
             id="countOfBricks"
             type="num"
             value={countOfBricks}
-            onChange={(e) => setCountOfBricks(e.target.value)}
+            onChange={(e) => setCountOfBricks(Number(e.target.value))}
           />
         </div>
         <div>
@@ -92,7 +101,7 @@ export default function Home() {
             id="ozPerBrick"
             type="num"
             value={ozPerBrick}
-            onChange={(e) => setOzPerBrick(e.target.value)}
+            onChange={(e) => setOzPerBrick(Number(e.target.value))}
           />
         </div>
         <div>Total Oz saved: {totalOzSaved}</div>
@@ -104,7 +113,7 @@ export default function Home() {
             id="ozPerBottle"
             type="num"
             value={ozPerBottle}
-            onChange={(e) => setOzPerBottle(e.target.value)}
+            onChange={(e) => setOzPerBottle(Number(e.target.value))}
           />
         </div>
         <div>
@@ -115,7 +124,7 @@ export default function Home() {
             id="bottlesPerDay"
             type="num"
             value={bottlesPerDay}
-            onChange={(e) => setBottlesPerDay(e.target.value)}
+            onChange={(e) => setBottlesPerDay(Number(e.target.value))}
           />
         </div>
         <div>Days of Saved Milk: {daysOfSavedMilk}</div>
@@ -127,7 +136,7 @@ export default function Home() {
             id="ozSavedPerDay"
             type="num"
             value={ozSavedPerDay}
-            onChange={(e) => setOzSavedPerDay(e.target.value)}
+            onChange={(e) => setOzSavedPerDay(Number(e.target.value))}
           />
         </div>
         <div>
@@ -139,7 +148,10 @@ export default function Home() {
             onChange={(date) => setMilkEndDate(date)}
           />
         </div>
-        {/* <div>Pump End Date: {stopPumpingDate}</div> */}
+        <div>Pump End Date: {stopPumpingDate}</div>
+        <button type="button" onClick={calculateMilkStff}>
+          CALCULATE
+        </button>
       </form>
     </main>
   );
