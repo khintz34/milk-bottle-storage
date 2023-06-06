@@ -22,6 +22,7 @@ export default function Home() {
   const [stopPumpingDate, setStopPumpingDate] = useState();
   const [ozSavedPerDay, setOzSavedPerDay] = useState(10);
   const [milkEndDate, setMilkEndDate] = useState(new Date("2/11/24"));
+  const [showCalcs, setShowCals] = useState(`${styles.hide}`);
 
   useEffect(() => {
     console.log(countOfBricks * ozPerBrick);
@@ -33,7 +34,6 @@ export default function Home() {
   }, [bottlesPerDay, totalOzSaved, ozPerBottle]);
 
   function calculateMilkStff() {
-    // e.preventDefault();
     let endDate = milkEndDate;
     let startDate = addDays(new Date(), daysOfSavedMilk);
     console.log("startDate: ", startDate);
@@ -80,30 +80,31 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <Header />
-      <form action="">
-        <div>
-          <div>
-            <h2>Current Saved Amount</h2>
-            <label htmlFor="countOfBricks">How many bricks do you have?</label>
-            <input
-              id="countOfBricks"
-              type="num"
-              value={countOfBricks}
-              onChange={(e) => setCountOfBricks(Number(e.target.value))}
-            />
-          </div>
-          <div>
-            <label htmlFor="ozPerBrick">How many Oz per Brick?</label>
-            <input
-              id="ozPerBrick"
-              type="num"
-              value={ozPerBrick}
-              onChange={(e) => setOzPerBrick(Number(e.target.value))}
-            />
-          </div>
-          <div>Total Oz saved: {totalOzSaved}</div>
+      <form action="" className={styles.formMain}>
+        <div className={styles.formQuestion}>
+          <label htmlFor="countOfBricks">
+            How many bricks do you have saved?
+          </label>
+          <input
+            id="countOfBricks"
+            type="num"
+            value={countOfBricks}
+            onChange={(e) => setCountOfBricks(Number(e.target.value))}
+            className={styles.formInputNum}
+          />
         </div>
-        <div>
+        <div className={styles.formQuestion}>
+          <label htmlFor="ozPerBrick">How many Oz per Brick?</label>
+          <input
+            id="ozPerBrick"
+            type="num"
+            value={ozPerBrick}
+            onChange={(e) => setOzPerBrick(Number(e.target.value))}
+            className={styles.formInputNum}
+          />
+        </div>
+
+        <div className={styles.formQuestion}>
           <label htmlFor="ozPerBottle">
             How many Oz per Bottle after pumping stops?
           </label>
@@ -112,9 +113,10 @@ export default function Home() {
             type="num"
             value={ozPerBottle}
             onChange={(e) => setOzPerBottle(Number(e.target.value))}
+            className={styles.formInputNum}
           />
         </div>
-        <div>
+        <div className={styles.formQuestion}>
           <label htmlFor="bottlesPerDay">
             How many bottles needed per day after pumping stops?
           </label>
@@ -123,10 +125,11 @@ export default function Home() {
             type="num"
             value={bottlesPerDay}
             onChange={(e) => setBottlesPerDay(Number(e.target.value))}
+            className={styles.formInputNum}
           />
         </div>
-        <div>Days of Saved Milk: {daysOfSavedMilk}</div>
-        <div>
+
+        <div className={styles.formQuestion}>
           <label htmlFor="ozSavedPerDay">
             How many Oz are you saving per day?
           </label>
@@ -135,21 +138,37 @@ export default function Home() {
             type="num"
             value={ozSavedPerDay}
             onChange={(e) => setOzSavedPerDay(Number(e.target.value))}
+            className={styles.formInputNum}
           />
         </div>
-        <div>
+        <div className={styles.formQuestion}>
           <label htmlFor="milkEndDate">
             When are you wanting your child to have milk until?
           </label>
           <DatePicker
             selected={milkEndDate}
             onChange={(date) => setMilkEndDate(date)}
+            className={styles.formInputCal}
           />
         </div>
-        <div>Pump End Date: {stopPumpingDate}</div>
-        <button type="button" onClick={calculateMilkStff}>
-          CALCULATE
-        </button>
+
+        <div className={styles.formQuestion}>
+          <button
+            type="button"
+            onClick={() => {
+              calculateMilkStff();
+              setShowCals(`${styles.show}`);
+            }}
+            className={styles.formBtn}
+          >
+            CALCULATE
+          </button>
+        </div>
+        <div className={showCalcs}>
+          {/* <div>Total Oz saved: {totalOzSaved}</div>
+          <div>Days of Saved Milk: {daysOfSavedMilk}</div> */}
+          <div>Pump End Date: {stopPumpingDate}</div>
+        </div>
       </form>
     </main>
   );
