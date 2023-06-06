@@ -10,6 +10,7 @@ import {
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { addDays } from "date-fns/esm";
+import Header from "@/components/header";
 
 export default function Home() {
   const [countOfBricks, setCountOfBricks] = useState(8);
@@ -47,13 +48,11 @@ export default function Home() {
     console.log("EndNum: ", endNumber);
     let days = 0;
     let fraction = ozSavedPerDay / neededOzPerDay;
-    console.log("fraction: ", fraction);
     let peaked = false;
     let peakedDays;
 
     for (let i = 0; i < daysDif; i++) {
       if (!peaked) {
-        // console.log(startNumber, endNumber, days);
         if (startNumber < endNumber) {
           days++;
           endNumber -= neededOzPerDay;
@@ -63,19 +62,14 @@ export default function Home() {
           days++;
           peaked = true;
           peakedDays = days;
-          // console.log("----peak-----");
         }
       } else {
-        // console.log(startNumber, days);
         startNumber -= neededOzPerDay;
         days++;
       }
     }
 
-    // setStopPumpingDate(addDays(new Date(), peakedDays));
-    console.log(typeof addDays(new Date(), peakedDays));
     let objectDate = format(addDays(new Date(), peakedDays), "MMMM dd, yyyy");
-    console.log(typeof objectDate);
     setStopPumpingDate(objectDate);
 
     console.log("DAYS: ", peakedDays);
@@ -85,26 +79,30 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
+      <Header />
       <form action="">
         <div>
-          <label htmlFor="countOfBricks">How many bricks do you have?</label>
-          <input
-            id="countOfBricks"
-            type="num"
-            value={countOfBricks}
-            onChange={(e) => setCountOfBricks(Number(e.target.value))}
-          />
+          <div>
+            <h2>Current Saved Amount</h2>
+            <label htmlFor="countOfBricks">How many bricks do you have?</label>
+            <input
+              id="countOfBricks"
+              type="num"
+              value={countOfBricks}
+              onChange={(e) => setCountOfBricks(Number(e.target.value))}
+            />
+          </div>
+          <div>
+            <label htmlFor="ozPerBrick">How many Oz per Brick?</label>
+            <input
+              id="ozPerBrick"
+              type="num"
+              value={ozPerBrick}
+              onChange={(e) => setOzPerBrick(Number(e.target.value))}
+            />
+          </div>
+          <div>Total Oz saved: {totalOzSaved}</div>
         </div>
-        <div>
-          <label htmlFor="ozPerBrick">How many Oz per Brick?</label>
-          <input
-            id="ozPerBrick"
-            type="num"
-            value={ozPerBrick}
-            onChange={(e) => setOzPerBrick(Number(e.target.value))}
-          />
-        </div>
-        <div>Total Oz saved: {totalOzSaved}</div>
         <div>
           <label htmlFor="ozPerBottle">
             How many Oz per Bottle after pumping stops?
