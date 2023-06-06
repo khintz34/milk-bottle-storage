@@ -48,3 +48,9 @@
   height: 4vh;
   font-size: 2.5vh;
 }
+
+.formEnd {
+  text-align: center;
+  font-size: 2.5vh;
+  color: red;
+}

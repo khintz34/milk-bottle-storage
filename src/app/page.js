@@ -89,7 +89,10 @@ export default function Home() {
             id="countOfBricks"
             type="num"
             value={countOfBricks}
-            onChange={(e) => setCountOfBricks(Number(e.target.value))}
+            onChange={(e) => {
+              setCountOfBricks(Number(e.target.value));
+              setShowCals(`${styles.hide}`);
+            }}
             className={styles.formInputNum}
           />
         </div>
@@ -99,7 +102,10 @@ export default function Home() {
             id="ozPerBrick"
             type="num"
             value={ozPerBrick}
-            onChange={(e) => setOzPerBrick(Number(e.target.value))}
+            onChange={(e) => {
+              setOzPerBrick(Number(e.target.value));
+              setShowCals(`${styles.hide}`);
+            }}
             className={styles.formInputNum}
           />
         </div>
@@ -112,7 +118,10 @@ export default function Home() {
             id="ozPerBottle"
             type="num"
             value={ozPerBottle}
-            onChange={(e) => setOzPerBottle(Number(e.target.value))}
+            onChange={(e) => {
+              setOzPerBottle(Number(e.target.value));
+              setShowCals(`${styles.hide}`);
+            }}
             className={styles.formInputNum}
           />
         </div>
@@ -124,7 +133,10 @@ export default function Home() {
             id="bottlesPerDay"
             type="num"
             value={bottlesPerDay}
-            onChange={(e) => setBottlesPerDay(Number(e.target.value))}
+            onChange={(e) => {
+              setBottlesPerDay(Number(e.target.value));
+              setShowCals(`${styles.hide}`);
+            }}
             className={styles.formInputNum}
           />
         </div>
@@ -137,7 +149,10 @@ export default function Home() {
             id="ozSavedPerDay"
             type="num"
             value={ozSavedPerDay}
-            onChange={(e) => setOzSavedPerDay(Number(e.target.value))}
+            onChange={(e) => {
+              setOzSavedPerDay(Number(e.target.value));
+              setShowCals(`${styles.hide}`);
+            }}
             className={styles.formInputNum}
           />
         </div>
@@ -147,7 +162,10 @@ export default function Home() {
           </label>
           <DatePicker
             selected={milkEndDate}
-            onChange={(date) => setMilkEndDate(date)}
+            onChange={(date) => {
+              setMilkEndDate(date);
+              setShowCals(`${styles.hide}`);
+            }}
             className={styles.formInputCal}
           />
         </div>
@@ -164,7 +182,7 @@ export default function Home() {
             CALCULATE
           </button>
         </div>
-        <div className={showCalcs}>
+        <div className={`${styles.formEnd} ${showCalcs}`}>
           {/* <div>Total Oz saved: {totalOzSaved}</div>
           <div>Days of Saved Milk: {daysOfSavedMilk}</div> */}
           <div>Pump End Date: {stopPumpingDate}</div>
