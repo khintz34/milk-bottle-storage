@@ -20,13 +20,9 @@ const Header = () => {
     changeStatus(false);
   };
 
-  const resetTeamInfo = () => {
-    changeHeader(false);
-  };
-
   return (
     <header className={`${styles.header}`}>
-      <h1 onClick={resetTeamInfo} className={styles.headerSize}>
+      <h1 className={styles.headerSize}>
         <Link href={"/"}>Milk Storage Calculator</Link>
       </h1>
 

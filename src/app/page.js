@@ -83,6 +83,7 @@ export default function Home() {
               name="savedMilk"
               id="milkSavedYes"
               type="radio"
+              checked={milkSaved === true}
               onChange={(e) => {
                 setMilkSaved(true);
                 setShowCals(`${styles.hide}`);
@@ -94,7 +95,7 @@ export default function Home() {
               name="savedMilk"
               id="milkSavedNo"
               type="radio"
-              checked
+              checked={milkSaved === false}
               onChange={(e) => {
                 setMilkSaved(false);
                 setShowCals(`${styles.hide}`);
@@ -214,13 +215,16 @@ export default function Home() {
         </div>
         <div className={`${styles.formEnd} ${showCalcs}`}>
           <div>Pump End Date: {stopPumpingDate}</div>
-          <div>Total Oz saved: {totalOzSaved}</div>
-          <div>Days of Saved Milk: {daysOfSavedMilk}</div>
+          {milkSaved ? (
+            <div>
+              <div>Total Oz saved: {totalOzSaved}</div>
+              <div>Days of Saved Milk: {daysOfSavedMilk}</div>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </form>
     </main>
   );
 }
-
-//! note
-// find date of milk end then add oz per day needed to current date and subtract from end date until they are equal
