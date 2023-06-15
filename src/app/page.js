@@ -13,8 +13,8 @@ import { addDays } from "date-fns/esm";
 import Header from "@/components/header";
 
 export default function Home() {
-  const [countOfBricks, setCountOfBricks] = useState(8);
-  const [ozPerBrick, setOzPerBrick] = useState(60);
+  const [countOfBricks, setCountOfBricks] = useState(0);
+  const [ozPerBrick, setOzPerBrick] = useState(0);
   const [totalOzSaved, setTotalOzSaved] = useState(0);
   const [bottlesPerDay, setBottlesPerDay] = useState(1);
   const [ozPerBottle, setOzPerBottle] = useState(6);
@@ -23,9 +23,9 @@ export default function Home() {
   const [ozSavedPerDay, setOzSavedPerDay] = useState(10);
   const [milkEndDate, setMilkEndDate] = useState(new Date("2/11/24"));
   const [showCalcs, setShowCals] = useState(`${styles.hide}`);
+  const [milkSaved, setMilkSaved] = useState(false);
 
   useEffect(() => {
-    console.log(countOfBricks * ozPerBrick);
     setTotalOzSaved(countOfBricks * ozPerBrick);
   }, [countOfBricks, ozPerBrick]);
 
@@ -33,19 +33,17 @@ export default function Home() {
     setDaysOfSavedMilk(totalOzSaved / (bottlesPerDay * ozPerBottle));
   }, [bottlesPerDay, totalOzSaved, ozPerBottle]);
 
+  useEffect(() => {
+    console.log("Milky");
+  }, [milkSaved]);
+
   function calculateMilkStff() {
     let endDate = milkEndDate;
     let startDate = addDays(new Date(), daysOfSavedMilk);
-    console.log("startDate: ", startDate);
-    console.log("endDate:", milkEndDate);
-
     let daysDif = differenceInDays(endDate, startDate);
-
     let neededOzPerDay = bottlesPerDay * ozPerBottle;
     let endNumber = daysDif * neededOzPerDay;
     let startNumber = 0;
-    console.log("daysDif: ", daysDif);
-    console.log("EndNum: ", endNumber);
     let days = 0;
     let fraction = ozSavedPerDay / neededOzPerDay;
     let peaked = false;
@@ -71,10 +69,6 @@ export default function Home() {
 
     let objectDate = format(addDays(new Date(), peakedDays), "MMMM dd, yyyy");
     setStopPumpingDate(objectDate);
-
-    console.log("DAYS: ", peakedDays);
-    console.log("STOP DATE", addDays(new Date(), peakedDays));
-    console.log("------------------------");
   }
 
   return (
@@ -82,33 +76,69 @@ export default function Home() {
       <Header />
       <form action="" className={styles.formMain}>
         <div className={styles.formQuestion}>
-          <label htmlFor="countOfBricks">
-            How many bricks do you have saved?
-          </label>
-          <input
-            id="countOfBricks"
-            type="num"
-            value={countOfBricks}
-            onChange={(e) => {
-              setCountOfBricks(Number(e.target.value));
-              setShowCals(`${styles.hide}`);
-            }}
-            className={styles.formInputNum}
-          />
+          <fieldset>
+            <legend>Do you have any milk currently saved?</legend>
+            <label htmlFor="milkSavedYes">Yes</label>
+            <input
+              name="savedMilk"
+              id="milkSavedYes"
+              type="radio"
+              onChange={(e) => {
+                setMilkSaved(true);
+                setShowCals(`${styles.hide}`);
+              }}
+              className={styles.formInputNum}
+            />
+            <label htmlFor="milkSavedNo">No</label>
+            <input
+              name="savedMilk"
+              id="milkSavedNo"
+              type="radio"
+              checked
+              onChange={(e) => {
+                setMilkSaved(false);
+                setShowCals(`${styles.hide}`);
+                setCountOfBricks(0);
+                setOzPerBrick(0);
+              }}
+              className={styles.formInputNum}
+            />
+          </fieldset>
         </div>
-        <div className={styles.formQuestion}>
-          <label htmlFor="ozPerBrick">How many Oz per Brick?</label>
-          <input
-            id="ozPerBrick"
-            type="num"
-            value={ozPerBrick}
-            onChange={(e) => {
-              setOzPerBrick(Number(e.target.value));
-              setShowCals(`${styles.hide}`);
-            }}
-            className={styles.formInputNum}
-          />
-        </div>
+        {milkSaved ? (
+          <div>
+            <div className={styles.formQuestion}>
+              <label htmlFor="countOfBricks">
+                How many bricks do you have saved?
+              </label>
+              <input
+                id="countOfBricks"
+                type="num"
+                value={countOfBricks}
+                onChange={(e) => {
+                  setCountOfBricks(Number(e.target.value));
+                  setShowCals(`${styles.hide}`);
+                }}
+                className={styles.formInputNum}
+              />
+            </div>
+            <div className={styles.formQuestion}>
+              <label htmlFor="ozPerBrick">How many Oz per Brick?</label>
+              <input
+                id="ozPerBrick"
+                type="num"
+                value={ozPerBrick}
+                onChange={(e) => {
+                  setOzPerBrick(Number(e.target.value));
+                  setShowCals(`${styles.hide}`);
+                }}
+                className={styles.formInputNum}
+              />
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
 
         <div className={styles.formQuestion}>
           <label htmlFor="ozPerBottle">
@@ -183,9 +213,9 @@ export default function Home() {
           </button>
         </div>
         <div className={`${styles.formEnd} ${showCalcs}`}>
-          {/* <div>Total Oz saved: {totalOzSaved}</div>
-          <div>Days of Saved Milk: {daysOfSavedMilk}</div> */}
           <div>Pump End Date: {stopPumpingDate}</div>
+          <div>Total Oz saved: {totalOzSaved}</div>
+          <div>Days of Saved Milk: {daysOfSavedMilk}</div>
         </div>
       </form>
     </main>
