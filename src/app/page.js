@@ -1,6 +1,6 @@
 "use client";
 import styles from "./page.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   format,
   subDays,
@@ -24,6 +24,7 @@ export default function Home() {
   const [milkEndDate, setMilkEndDate] = useState(new Date("2/11/24"));
   const [showCalcs, setShowCals] = useState(`${styles.hide}`);
   const [milkSaved, setMilkSaved] = useState(false);
+  const formEndRef = useRef(null);
 
   useEffect(() => {
     setTotalOzSaved(countOfBricks * ozPerBrick);
@@ -65,6 +66,10 @@ export default function Home() {
 
     let objectDate = format(addDays(new Date(), peakedDays), "MMMM dd, yyyy");
     setStopPumpingDate(objectDate);
+
+    let elem = formEndRef.current;
+
+    elem.scrollIntoView({ behavior: "smooth", block: "end" });
   }
 
   return (
@@ -208,7 +213,7 @@ export default function Home() {
             CALCULATE
           </button>
         </div>
-        <div className={`${styles.formEnd} ${showCalcs}`}>
+        <div className={`${styles.formEnd} ${showCalcs}`} ref={formEndRef}>
           <div>Pump End Date: {stopPumpingDate}</div>
           {milkSaved ? (
             <div>
