@@ -33,10 +33,6 @@ export default function Home() {
     setDaysOfSavedMilk(totalOzSaved / (bottlesPerDay * ozPerBottle));
   }, [bottlesPerDay, totalOzSaved, ozPerBottle]);
 
-  useEffect(() => {
-    console.log("Milky");
-  }, [milkSaved]);
-
   function calculateMilkStff() {
     let endDate = milkEndDate;
     let startDate = addDays(new Date(), daysOfSavedMilk);
@@ -73,7 +69,6 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <Header />
       <form action="" className={styles.formMain}>
         <div className={styles.formQuestion}>
           <fieldset>

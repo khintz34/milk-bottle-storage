@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import styles from "../styles/Header.module.css";
 import Link from "next/link";
@@ -56,12 +57,12 @@ const Header = () => {
               Home
             </li>
           </Link>
-          <Link href={"/"} className=" whiteFont">
+          <Link href={"/FAQ"} className=" whiteFont">
             <li
               className={`${styles.headerBtn} ${styles.menuItem}`}
               onClick={closeMenu}
             >
-              Something
+              FAQs
             </li>
           </Link>
           <Link className=" whiteFont" href={"/"}>
