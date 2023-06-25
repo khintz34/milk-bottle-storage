@@ -1,6 +1,6 @@
 "use client";
 import react, { useState } from "react";
-import { FaCaretDown, FaCaretUp } from "react-icons/fa";
+// import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import styles from "../styles/FaqLayout.module.css";
 
 export default function FaqLayout(props) {
