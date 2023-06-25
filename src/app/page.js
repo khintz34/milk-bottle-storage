@@ -22,7 +22,7 @@ export default function Home() {
   const [stopPumpingDate, setStopPumpingDate] = useState();
   const [ozSavedPerDay, setOzSavedPerDay] = useState(10);
   const [milkEndDate, setMilkEndDate] = useState(new Date("2/11/24"));
-  const [showCalcs, setShowCals] = useState(`${styles.hide}`);
+  const [showCalcs, setShowCalcs] = useState(`${styles.hide}`);
   const [milkSaved, setMilkSaved] = useState(false);
   const formEndRef = useRef(null);
 
@@ -88,7 +88,7 @@ export default function Home() {
               checked={milkSaved === true}
               onChange={(e) => {
                 setMilkSaved(true);
-                setShowCals(`${styles.hide}`);
+                setShowCalcs(`${styles.hide}`);
               }}
               className={styles.formInputNum}
             />
@@ -100,7 +100,7 @@ export default function Home() {
               checked={milkSaved === false}
               onChange={(e) => {
                 setMilkSaved(false);
-                setShowCals(`${styles.hide}`);
+                setShowCalcs(`${styles.hide}`);
                 setCountOfBricks(0);
                 setOzPerBrick(0);
               }}
@@ -120,7 +120,7 @@ export default function Home() {
                 value={countOfBricks}
                 onChange={(e) => {
                   setCountOfBricks(Number(e.target.value));
-                  setShowCals(`${styles.hide}`);
+                  setShowCalcs(`${styles.hide}`);
                 }}
                 className={styles.formInputNum}
               />
@@ -133,7 +133,7 @@ export default function Home() {
                 value={ozPerBrick}
                 onChange={(e) => {
                   setOzPerBrick(Number(e.target.value));
-                  setShowCals(`${styles.hide}`);
+                  setShowCalcs(`${styles.hide}`);
                 }}
                 className={styles.formInputNum}
               />
@@ -153,7 +153,7 @@ export default function Home() {
             value={ozPerBottle}
             onChange={(e) => {
               setOzPerBottle(Number(e.target.value));
-              setShowCals(`${styles.hide}`);
+              setShowCalcs(`${styles.hide}`);
             }}
             className={styles.formInputNum}
           />
@@ -168,7 +168,7 @@ export default function Home() {
             value={bottlesPerDay}
             onChange={(e) => {
               setBottlesPerDay(Number(e.target.value));
-              setShowCals(`${styles.hide}`);
+              setShowCalcs(`${styles.hide}`);
             }}
             className={styles.formInputNum}
           />
@@ -184,7 +184,7 @@ export default function Home() {
             value={ozSavedPerDay}
             onChange={(e) => {
               setOzSavedPerDay(Number(e.target.value));
-              setShowCals(`${styles.hide}`);
+              setShowCalcs(`${styles.hide}`);
             }}
             className={styles.formInputNum}
           />
@@ -197,7 +197,7 @@ export default function Home() {
             selected={milkEndDate}
             onChange={(date) => {
               setMilkEndDate(date);
-              setShowCals(`${styles.hide}`);
+              setShowCalcs(`${styles.hide}`);
             }}
             className={styles.formInputCal}
           />
@@ -208,7 +208,7 @@ export default function Home() {
             type="button"
             onClick={() => {
               calculateMilkStff();
-              setShowCals(`${styles.show}`);
+              setShowCalcs(`${styles.show}`);
             }}
             className={styles.formBtn}
           >

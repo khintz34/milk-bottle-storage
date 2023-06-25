@@ -8,9 +8,37 @@
 .question {
   font-size: 2.6vh;
   text-emphasis: bolder;
-  margin-bottom: 1vh;
+  /* margin-bottom: 5vh; */
+  padding-left: 2vw;
 }
 
 .answer {
   font-size: 2.3vh;
+}
+
+.questionContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container {
+  border: 2px solid white;
+  overflow: hidden;
+  width: 90vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: height 2s ease;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+  max-height: 50vh;
+  padding: 2vw 3vh;
 }
