@@ -219,8 +219,12 @@ export default function Home() {
           <div>Pump End Date: {stopPumpingDate}</div>
           {milkSaved ? (
             <div>
-              <div>Total Oz saved: {totalOzSaved}</div>
-              <div>Days of Saved Milk: {daysOfSavedMilk}</div>
+              <div className={styles.colorWhite}>
+                Total Oz saved: {totalOzSaved}
+              </div>
+              <div className={styles.colorWhite}>
+                Days of Saved Milk: {daysOfSavedMilk}
+              </div>
             </div>
           ) : (
             ""
