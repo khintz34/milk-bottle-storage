@@ -1,6 +1,6 @@
 "use client";
 import react, { useState } from "react";
-// import { FaCaretDown, FaCaretUp } from "react-icons/fa";
+import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import styles from "../styles/FaqLayout.module.css";
 
 export default function FaqLayout(props) {
@@ -25,8 +25,8 @@ export default function FaqLayout(props) {
       >
         <div className={styles.questionContainer}>
           <div className={styles.question}>{props.question}</div>
-          {/* <div>{down ? <FaCaretDown /> : <FaCaretUp />}</div> */}
-          <div>x</div>
+          <div>{down ? <FaCaretDown /> : <FaCaretUp />}</div>
+          {/* <div>x</div> */}
         </div>
         <div className={`${styles.answer} ${hidden}`}>{props.answer}</div>
       </div>
