@@ -66,11 +66,13 @@ export default function Home() {
 
     let objectDate = format(addDays(new Date(), peakedDays), "MMMM dd, yyyy");
     setStopPumpingDate(objectDate);
+  }
 
+  useEffect(() => {
     let elem = formEndRef.current;
 
-    elem.scrollIntoView({ behavior: "smooth", block: "end" });
-  }
+    elem.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [showCalcs]);
 
   return (
     <main className={styles.main}>
