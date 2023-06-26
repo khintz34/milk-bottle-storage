@@ -65,12 +65,12 @@ const Header = () => {
               FAQs
             </li>
           </Link>
-          <Link className=" whiteFont" href={"/"}>
+          <Link className=" whiteFont" href={"/Resources"}>
             <li
               className={`${styles.headerBtn} ${styles.menuItem}`}
               onClick={closeMenu}
             >
-              Something Else
+              Resources
             </li>
           </Link>
         </ul>

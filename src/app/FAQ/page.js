@@ -18,7 +18,7 @@ export default function Faq() {
         answer="It is accurate based on the information provided. If you save less than the amount you input, then your end date will be off. This tool should be used as an estimate."
       />
       <FaqLayout
-        question="How many Oz per day does my babyy need?"
+        question="How many Oz per day does my baby need?"
         answer={`Please discuss with your pediatrician about your baby's dietary needs. `}
       />
     </main>
