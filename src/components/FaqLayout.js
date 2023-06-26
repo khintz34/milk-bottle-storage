@@ -19,10 +19,7 @@ export default function FaqLayout(props) {
 
   return (
     <main className={styles.main}>
-      <div
-        className={`${styles.container} ${heightStyle}`}
-        onClick={handleToggle}
-      >
+      <div className={`${styles.container}`} onClick={handleToggle}>
         <div className={styles.questionContainer}>
           <div className={styles.question}>{props.question}</div>
           <div>{down ? <FaCaretDown /> : <FaCaretUp />}</div>
