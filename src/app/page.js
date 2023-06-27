@@ -80,32 +80,38 @@ export default function Home() {
         <div className={styles.formQuestion}>
           <fieldset>
             <legend>Do you have any milk currently saved?</legend>
-            <label htmlFor="milkSavedYes">Yes</label>
-            <input
-              name="savedMilk"
-              id="milkSavedYes"
-              type="radio"
-              checked={milkSaved === true}
-              onChange={(e) => {
-                setMilkSaved(true);
-                setShowCalcs(`${styles.hide}`);
-              }}
-              className={styles.formInputNum}
-            />
-            <label htmlFor="milkSavedNo">No</label>
-            <input
-              name="savedMilk"
-              id="milkSavedNo"
-              type="radio"
-              checked={milkSaved === false}
-              onChange={(e) => {
-                setMilkSaved(false);
-                setShowCalcs(`${styles.hide}`);
-                setCountOfBricks(0);
-                setOzPerBrick(0);
-              }}
-              className={styles.formInputNum}
-            />
+            <div className={styles.radioContainer}>
+              <div>
+                <label htmlFor="milkSavedYes">Yes</label>
+                <input
+                  name="savedMilk"
+                  id="milkSavedYes"
+                  type="radio"
+                  checked={milkSaved === true}
+                  onChange={(e) => {
+                    setMilkSaved(true);
+                    setShowCalcs(`${styles.hide}`);
+                  }}
+                  className={styles.formInputRadio}
+                />
+              </div>
+              <div>
+                <label htmlFor="milkSavedNo">No</label>
+                <input
+                  name="savedMilk"
+                  id="milkSavedNo"
+                  type="radio"
+                  checked={milkSaved === false}
+                  onChange={(e) => {
+                    setMilkSaved(false);
+                    setShowCalcs(`${styles.hide}`);
+                    setCountOfBricks(0);
+                    setOzPerBrick(0);
+                  }}
+                  className={styles.formInputRadio}
+                />
+              </div>
+            </div>
           </fieldset>
         </div>
         {milkSaved ? (

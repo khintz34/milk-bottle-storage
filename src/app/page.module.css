@@ -27,6 +27,10 @@
   font-size: 2.1vh;
 }
 
+.formInputRadio {
+  margin: 2vh 2vw;
+}
+
 .formInputCal {
   width: 50vw;
   font-size: 2.1vh;
@@ -58,4 +62,12 @@
 
 .colorWhite {
   color: white;
+}
+
+.radioContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 5vw;
+  justify-content: center;
+  align-items: center;
 }

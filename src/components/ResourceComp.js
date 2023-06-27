@@ -8,7 +8,7 @@ export default function Resource(props) {
   }
   return (
     <main className={styles.main}>
-      <div onClick={openTab}>
+      <div onClick={openTab} className={styles.resourceContainer}>
         <h3 className={styles.h3}>{props.name}</h3>
         <p>{props.desc}</p>
       </div>

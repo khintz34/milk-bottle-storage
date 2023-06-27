@@ -24,7 +24,7 @@ const Header = () => {
   return (
     <header className={`${styles.header}`}>
       <h1 className={styles.headerSize}>
-        <Link href={"/"}>Milk Storage Calculator</Link>
+        <Link href={"/"}>Pump End Date Calculator</Link>
       </h1>
 
       <div className={styles.keepRight}>
@@ -54,7 +54,7 @@ const Header = () => {
               className={`${styles.headerBtn} ${styles.menuItem}`}
               onClick={closeMenu}
             >
-              Home
+              Calculator
             </li>
           </Link>
           <Link href={"/FAQ"} className=" whiteFont">
