@@ -3,11 +3,17 @@
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+  background-color: var(--primary-background);
 }
 
 .formMain {
   margin-top: 12vh;
   padding-bottom: 5vh;
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .formQuestion {
@@ -23,8 +29,7 @@
 }
 
 .formInputNum {
-  width: 20vw;
-  font-size: 2.1vh;
+  width: 10ch;
 }
 
 .formInputRadio {
@@ -32,7 +37,14 @@
 }
 
 .formInputCal {
-  width: 50vw;
+  min-width: 20vw;
+}
+
+.inputBasic {
+  border-radius: 20px;
+  border: 1px solid white;
+  padding: 0.5vh 2vw;
+  background-color: #999;
   font-size: 2.1vh;
 }
 
@@ -47,11 +59,13 @@
 }
 
 .formBtn {
-  width: 45vw;
+  min-width: 30vw;
   color: black;
   background-color: white;
   height: 4vh;
   font-size: 2.5vh;
+  border-radius: 20px;
+  padding: 0.5vh 2vw;
 }
 
 .formEnd {
@@ -70,4 +84,10 @@
   gap: 5vw;
   justify-content: center;
   align-items: center;
+}
+
+@media (max-width: 600px) {
+  .formBtn {
+    padding: 0.5vh 4vw;
+  }
 }

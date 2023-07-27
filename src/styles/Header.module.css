@@ -1,5 +1,5 @@
 .header {
-  border-bottom: 1px solid;
+  border-bottom: 1px solid black;
   width: 100vw;
   max-width: 100vw;
   height: 10vh;
@@ -11,6 +11,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: var(--primary-background);
 }
 
 .headerSize {
@@ -38,6 +39,8 @@
 
 .whiteFont {
   color: white;
+  background-color: white;
+  text-decoration: none;
 }
 
 .whiteOutline {
@@ -92,14 +95,14 @@
   align-items: center;
   padding: 2vh;
   font-size: 3vh;
-  margin-bottom: 2vh;
+  /* margin-bottom: 2vh; */
   color: white;
   background-color: #999;
   font-weight: 700;
 }
 
 .menuItem:hover {
-  background-color: black;
+  background-color: #748cab;
   color: white;
   transform: scale(1.1);
 }
@@ -136,9 +139,4 @@
 #signUp-btn2:hover {
   background-color: var(--forest-color);
   color: white;
-}
-
-.whiteFont {
-  color: white;
-  text-decoration: none;
 }

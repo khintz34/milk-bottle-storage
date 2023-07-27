@@ -4,4 +4,5 @@
   align-items: center;
   min-height: 88vh;
   margin-top: 12vh;
+  background-color: var(--primary-background);
 }

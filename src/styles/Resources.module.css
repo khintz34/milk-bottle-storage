@@ -7,6 +7,7 @@
   margin-bottom: 5vh;
   padding: 0 3vw;
   text-align: center;
+  background-color: var(--primary-background);
 }
 
 .h3 {

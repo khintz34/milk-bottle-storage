@@ -128,7 +128,7 @@ export default function Home() {
                   setCountOfBricks(Number(e.target.value));
                   setShowCalcs(`${styles.hide}`);
                 }}
-                className={styles.formInputNum}
+                className={`${styles.formInputNum} ${styles.inputBasic}`}
               />
             </div>
             <div className={styles.formQuestion}>
@@ -141,7 +141,7 @@ export default function Home() {
                   setOzPerBrick(Number(e.target.value));
                   setShowCalcs(`${styles.hide}`);
                 }}
-                className={styles.formInputNum}
+                className={`${styles.formInputNum} ${styles.inputBasic}`}
               />
             </div>
           </div>
@@ -151,7 +151,7 @@ export default function Home() {
 
         <div className={styles.formQuestion}>
           <label htmlFor="ozPerBottle">
-            How many Oz per Bottle after pumping stops?
+            How many Oz per bottle after pumping stops?
           </label>
           <input
             id="ozPerBottle"
@@ -161,7 +161,7 @@ export default function Home() {
               setOzPerBottle(Number(e.target.value));
               setShowCalcs(`${styles.hide}`);
             }}
-            className={styles.formInputNum}
+            className={`${styles.formInputNum} ${styles.inputBasic}`}
           />
         </div>
         <div className={styles.formQuestion}>
@@ -176,7 +176,7 @@ export default function Home() {
               setBottlesPerDay(Number(e.target.value));
               setShowCalcs(`${styles.hide}`);
             }}
-            className={styles.formInputNum}
+            className={`${styles.formInputNum} ${styles.inputBasic}`}
           />
         </div>
 
@@ -192,7 +192,7 @@ export default function Home() {
               setOzSavedPerDay(Number(e.target.value));
               setShowCalcs(`${styles.hide}`);
             }}
-            className={styles.formInputNum}
+            className={`${styles.formInputNum} ${styles.inputBasic}`}
           />
         </div>
         <div className={styles.formQuestion}>
@@ -205,7 +205,7 @@ export default function Home() {
               setMilkEndDate(date);
               setShowCalcs(`${styles.hide}`);
             }}
-            className={styles.formInputCal}
+            className={`${styles.formInputCal} ${styles.inputBasic}`}
           />
         </div>
 

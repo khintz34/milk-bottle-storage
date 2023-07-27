@@ -49,7 +49,11 @@ const Header = () => {
             navbarStatus === true ? `${styles.showMenu}` : `${styles.hideNav}`
           }`}
         >
-          <Link href={"/"} className=" whiteFont">
+          <Link
+            href={"/"}
+            className="whiteFont"
+            style={{ backgroundColor: "white" }}
+          >
             <li
               className={`${styles.headerBtn} ${styles.menuItem}`}
               onClick={closeMenu}
@@ -57,7 +61,11 @@ const Header = () => {
               Calculator
             </li>
           </Link>
-          <Link href={"/FAQ"} className=" whiteFont">
+          <Link
+            href={"/FAQ"}
+            className=" whiteFont"
+            style={{ backgroundColor: "white" }}
+          >
             <li
               className={`${styles.headerBtn} ${styles.menuItem}`}
               onClick={closeMenu}
@@ -65,7 +73,11 @@ const Header = () => {
               FAQs
             </li>
           </Link>
-          <Link className=" whiteFont" href={"/Resources"}>
+          <Link
+            className=" whiteFont"
+            href={"/Resources"}
+            style={{ backgroundColor: "white" }}
+          >
             <li
               className={`${styles.headerBtn} ${styles.menuItem}`}
               onClick={closeMenu}
