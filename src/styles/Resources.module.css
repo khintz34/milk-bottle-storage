@@ -17,4 +17,5 @@
 
 .resourceContainer {
   cursor: pointer;
+  background-color: var(--primary-background);
 }
