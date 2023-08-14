@@ -6,10 +6,10 @@ import {
   subDays,
   differenceInDays,
   differenceInMonths,
+  addDays,
 } from "date-fns";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { addDays } from "date-fns/esm";
 import Header from "@/components/header";
 
 export default function Home() {
@@ -34,7 +34,7 @@ export default function Home() {
     setDaysOfSavedMilk(totalOzSaved / (bottlesPerDay * ozPerBottle));
   }, [bottlesPerDay, totalOzSaved, ozPerBottle]);
 
-  function calculateMilkStff() {
+  function calculateMilkStuff() {
     let endDate = milkEndDate;
     let startDate = addDays(new Date(), daysOfSavedMilk);
     let daysDif = differenceInDays(endDate, startDate);
@@ -45,6 +45,7 @@ export default function Home() {
     let fraction = ozSavedPerDay / neededOzPerDay;
     let peaked = false;
     let peakedDays;
+    let objectDate;
 
     for (let i = 0; i < daysDif; i++) {
       if (!peaked) {
@@ -64,7 +65,12 @@ export default function Home() {
       }
     }
 
-    let objectDate = format(addDays(new Date(), peakedDays), "MMMM dd, yyyy");
+    if (addDays(new Date(), peakedDays) === "Invalid Date") {
+      objectDate = format(addDays(new Date(), peakedDays), "MMMM dd, yyyy");
+    } else {
+      objectDate = format(new Date(), "MMMM dd, yyyy");
+    }
+
     setStopPumpingDate(objectDate);
   }
 
@@ -91,6 +97,7 @@ export default function Home() {
                   onChange={(e) => {
                     setMilkSaved(true);
                     setShowCalcs(`${styles.hide}`);
+                    // console.log("yes");
                   }}
                   className={styles.formInputRadio}
                 />
@@ -107,6 +114,7 @@ export default function Home() {
                     setShowCalcs(`${styles.hide}`);
                     setCountOfBricks(0);
                     setOzPerBrick(0);
+                    // console.log("no");
                   }}
                   className={styles.formInputRadio}
                 />
@@ -213,7 +221,7 @@ export default function Home() {
           <button
             type="button"
             onClick={() => {
-              calculateMilkStff();
+              calculateMilkStuff();
               setShowCalcs(`${styles.show}`);
             }}
             className={styles.formBtn}
