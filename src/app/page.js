@@ -65,9 +65,9 @@ export default function Home() {
       }
     }
 
-    if (addDays(new Date(), peakedDays) === "Invalid Date") {
+    try {
       objectDate = format(addDays(new Date(), peakedDays), "MMMM dd, yyyy");
-    } else {
+    } catch {
       objectDate = format(new Date(), "MMMM dd, yyyy");
     }
 
@@ -97,7 +97,6 @@ export default function Home() {
                   onChange={(e) => {
                     setMilkSaved(true);
                     setShowCalcs(`${styles.hide}`);
-                    // console.log("yes");
                   }}
                   className={styles.formInputRadio}
                 />
@@ -114,7 +113,6 @@ export default function Home() {
                     setShowCalcs(`${styles.hide}`);
                     setCountOfBricks(0);
                     setOzPerBrick(0);
-                    // console.log("no");
                   }}
                   className={styles.formInputRadio}
                 />
